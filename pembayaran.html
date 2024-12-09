@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesan Antar</title>
+    <style>
+        /* Styling umum */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        /* Header Styling */
+        header {
+            background: linear-gradient(to right, #2c3e50, #34495e); /* Gradien Background */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+            border-bottom: 5px solid #f39c12; /* Tambahkan border bawah dengan warna emas */
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase; /* Membuat judul uppercase */
+            margin: 0;
+            font-weight: bold; /* Menambahkan ketebalan font */
+        }
+
+        a {
+            color: #f39c12; /* Warna emas untuk tautan */
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #f1c40f; /* Warna lebih terang saat hover */
+            text-decoration: underline;
+        }
+
+        /* Responsif untuk perangkat kecil */
+        @media (max-width: 768px) {
+            .nav-bar {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            a {
+                margin-top: 10px;
+                font-size: 1rem;
+            }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .menu-item input {
+            width: 50px;
+            padding: 5px;
+            font-size: 1rem;
+        }
+        .total {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .payment-form input, .payment-form button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .payment-form button {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        .payment-form button:hover {
+            background-color: #34495e;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav-bar">
+        <h1>Pesan Antar</h1>
+        <a href="index.html">Kembali ke Beranda</a>
+    </div>    
+</header>
+
+<div class="container">
+
+    <!-- Menu Pilihan -->
+    <h2>Menu Pilihan</h2>
+    <div class="menu-item">
+        <label for="sate">Sate Maranggi (Rp 35.000): </label>
+        <input type="number" id="sate" value="0" min="0" onchange="updateTotal()">
+    </div>
+    <div class="menu-item">
+        <label for="rawon">Rawon (Rp 40.000): </label>
+        <input type="number" id="rawon" value="0" min="0" onchange="updateTotal()">
+    </div>
+    <div class="menu-item">
+        <label for="rendang">Rendang (Rp 40.000): </label>
+        <input type="number" id="rendang" value="0" min="0" onchange="updateTotal()">
+    </div>
+    <div class="menu-item">
+        <label for="papeda">Papeda (Rp 27.000): </label>
+        <input type="number" id="papeda" value="0" min="0" onchange="updateTotal()">
+    </div>
+    <div class="menu-item">
+        <label for="ayam">Ayam Taliwang (Rp 42.000): </label>
+        <input type="number" id="ayam" value="0" min="0" onchange="updateTotal()">
+    </div>
+    <div class="menu-item">
+        <label for="pepes">Pepes Ikan (Rp 32.000): </label>
+        <input type="number" id="pepes" value="0" min="0" onchange="updateTotal()">
+    </div>
+    <div class="menu-item">
+        <label for="teh">Teh Talua (Rp 17.000): </label>
+        <input type="number" id="teh" value="0" min="0" onchange="updateTotal()">
+    </div>
+    <div class="menu-item">
+        <label for="wedang">Wedang Uwuh (Rp 20.000): </label>
+        <input type="number" id="wedang" value="0" min="0" onchange="updateTotal()">
+    </div>
+
+    <!-- Total Harga -->
+    <h3>Total Harga</h3>
+    <p id="totalHarga">Rp 0</p>
+
+    <!-- Form Informasi Pembayaran -->
+    <div class="payment-form">
+        <h3>Informasi Pembayaran</h3>
+        <label for="nama">Nama:</label>
+        <input type="text" id="nama" placeholder="Masukkan nama Anda">
+
+        <label for="alamat">Alamat Pengiriman:</label>
+        <input type="text" id="alamat" placeholder="Masukkan alamat Anda">
+
+        <label for="totalBayar">Total Bayar:</label>
+        <input type="number" id="totalBayar" disabled>
+
+        <button onclick="prosesPembayaran()">Proses Pembayaran</button>
+        <div id="errorMessage" class="error-message"></div>
+    </div>
+
+</div>
+
+<script>
+    // Fungsi untuk menghitung total harga berdasarkan jumlah item yang dipilih
+    function updateTotal() {
+        // Daftar harga menu
+        const prices = {
+            sate: 35000,
+            rawon: 40000,
+            rendang: 40000,
+            papeda: 27000,
+            ayam: 42000,
+            pepes: 32000,
+            teh: 17000,
+            wedang: 20000
+        };
+
+        let total = 0; // Inisialisasi total harga
+
+        // Perulangan untuk menghitung total berdasarkan input
+        for (let menu in prices) {
+            const quantity = document.getElementById(menu).value || 0; // Ambil jumlah dari input
+            total += prices[menu] * parseInt(quantity); // Hitung total harga
+        }
+
+        // Perbarui tampilan total harga
+        document.getElementById('totalHarga').textContent = 'Rp ' + total.toLocaleString();
+        document.getElementById('totalBayar').value = total;
+    }
+
+    // Fungsi untuk memproses pembayaran dan membuka WhatsApp
+    function prosesPembayaran() {
+        // Ambil nilai dari input
+        const nama = document.getElementById('nama').value;
+        const alamat = document.getElementById('alamat').value;
+        const totalBayar = document.getElementById('totalBayar').value;
+
+        const errorMessage = document.getElementById('errorMessage');
+        errorMessage.textContent = ''; // Kosongkan pesan error
+
+        // Validasi input
+        if (!nama || !alamat || totalBayar == 0) {
+            errorMessage.textContent = "Harap isi nama, alamat, dan pilih menu.";
+            return;
+        }
+
+        // Format pesan untuk WhatsApp
+        const message = 
+            `Halo, saya ingin memesan:\n\n` +
+            `Nama: ${nama}\n` +
+            `Alamat: ${alamat}\n` +
+            `Total Bayar: Rp ${totalBayar}\n\n` +
+            `Terima kasih!`;
+
+        // Nomor WhatsApp tujuan
+        const phoneNumber = '6281229508835'; // Ganti dengan nomor tujuan Anda
+
+        // Buat URL WhatsApp dengan pesan yang diformat
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+        // Buka WhatsApp di tab baru
+        window.open(whatsappUrl, '_blank');
+    }
+</script>

@@ -1,0 +1,5 @@
+$( document ) .ready ( function ( ) { 
+    // Tambahkan pengguliran halus ke semua tautan
+     $( "a" ). on ( " click" , function ( event ) { 
+        // Pastikan this.hash memiliki nilai sebelum mengganti perilaku default 
+        if ( this.hash !== "" ) { // Cegah perilaku klik jangkar default             event.preventDefault (); // Simpan hash var hash = this.hash ; // Menggunakan metode animate() jQuery untuk menambahkan pengguliran halaman halus // Angka opsional (800) menentukan jumlah milidetik yang diperlukan untuk menggulir ke area yang ditentukan             $( "html, body" ). animate (                 { scrollTop : $(hash) .offset (). top ,                 }, 800 , function ( ) { // Tambahkan hash (#) ke URL saat pengguliran selesai (perilaku klik default) window.location.hash = hash; } )                 ;             }         // Akhiri jika     }); }) ;
